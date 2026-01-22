@@ -15,13 +15,14 @@ namespace Dominio
         //categoría(seleccionable de una lista desplegable.
         //imagen.
         //precio.
-        public int CodigoArticulo { get; set; }            //publico porque lo otorga la DB
+        public int Id { get; set; }
+        public string CodigoArticulo { get; set; }            //publico porque lo otorga la DB
         private string nombreArticulo;                     //privado para que no entre un string vacio
         private string descripcionArticulo;                //privado para que no entre un string vacio
-        public string MarcaArticulo { get; set; }          //publico porque lo voy a manejar dando las opciones yo
-        public string CategoriaArticulo { get; set; }      //publico porque lo voy a manejar dando las opciones yo
+        public Marca MarcaArticulo { get; set; }          //publico porque lo voy a manejar dando las opciones yo
+        public Categoria CategoriaArticulo { get; set; }      //publico porque lo voy a manejar dando las opciones yo
         public string ImagenArticulo { get; set; }         //publico porque puedo manejar que un producto no tenga imagen disponible
-        private float precioArticulo;                      //privado para manejar que el precio sea mayor a cero
+        private decimal precioArticulo;                     //privado para manejar que el precio sea mayor a cero
 
         public string NombreArticulo 
         {
@@ -53,7 +54,7 @@ namespace Dominio
                 }
             }
         }
-        public float PrecioArticulo
+        public decimal PrecioArticulo
         {
             get { return precioArticulo; }
             set

@@ -20,7 +20,7 @@ namespace ConexionDB
 
         public AccesoADB()
         {
-            conexion = new SqlConnection("algo"); //verificar y meter la direccion de la base de datos
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security = true"); //verificar y meter la direccion de la base de datos
             comando = new SqlCommand();   
         }
         public void setearConsulta(string consulta) 
@@ -71,6 +71,11 @@ namespace ConexionDB
 
                 throw ex;
             }
+        }
+        public void setearConsultaConSP(string sp) 
+        {
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = sp;
         }
     }
 }
