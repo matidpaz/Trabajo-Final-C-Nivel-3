@@ -9,9 +9,13 @@ namespace WebApplication1
 {
     public partial class Error : System.Web.UI.Page
     {
+        public string MensajeDeError { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Request.QueryString["error"] != null)
+            {
+                MensajeDeError = Request.QueryString["error"];
+            }
         }
     }
 }

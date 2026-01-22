@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using Microsoft.AspNet.FriendlyUrls;
 using Negocio;
 
 namespace WebApplication1
@@ -38,8 +39,8 @@ namespace WebApplication1
 	        }
 	        catch (Exception ex)
 	        {
-
-		        throw ex;
+				Session.Add("error", ex.ToString());
+				Response.Redirect("Error.aspx", false);
 	        }
 
 }

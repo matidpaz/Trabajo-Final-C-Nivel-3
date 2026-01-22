@@ -5,45 +5,18 @@
         <section class="row" aria-labelledby="aspnetTitle">
             <h1 id="aspnetTitle">Administracion de productos</h1>
             <p class="lead">Mi aplicacion de practica para mostrar productos en el sector de administracion.</p>
+            <p><a href="/" class="btn btn-primary btn-md">Modo Público &raquo;</a></p>
         </section>
 
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>@social</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            </section>
-
+        <div>
+            <asp:GridView Id="dgvProductos" AutoGenerateColumns="false" runat="server">
+                <Columns>
+                    <asp:BoundField HeaderText="Codigo Articulo" DataField="CodigoArticulo"/>
+                    <asp:BoundField HeaderText="Nombre Articulo" DataField="NombreArticulo"/>
+                    <asp:BoundField HeaderText="Descripcion" DataField="DescripcionArticulo"/>
+                    
+                </Columns>
+            </asp:GridView>
         </div>
         <div>
         </div>

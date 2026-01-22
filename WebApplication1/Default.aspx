@@ -6,16 +6,23 @@
         <style>
             .card-img-top {
                 width: 100%;
-                height: 250px; /* Define una altura fija para todas */
-                object-fit: contain; /* Ajusta la imagen sin recortarla, útil para productos */
+                height: 250px;             /* Define una altura fija para todas las tarjetas*/
+                object-fit: contain;       /* Ajusta la imagen sin recortarla */
                 background-color: #f8f9fa; /* Fondo gris claro para rellenar espacios vacíos */
             }
         </style>
 
         <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">Home</h1>
+            <%if (true)
+              {%>
+                    <h1 id="aspnetTitle">Home/Admin</h1>
+            <%}
+              else
+              {%>
+                    <h1 id="aspnetTitle">Home</h1>
+            <%} %>
             <p class="lead">Mi aplicacion de practica para mostrar productos.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+            <p><a href="Admin.aspx" class="btn btn-primary btn-md">Modo Admin &raquo;</a></p>
         </section>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -34,8 +41,16 @@
                         <%-- El margen superior automático (mt-auto) empuja el botón hacia abajo --%>
                         <div class="mt-auto">
                             <hr />
+                            <p class="fw-bold">Categoria: <%= art.CategoriaArticulo.Descripcion %></p>
+                            <p class="fw-bold">Marca: <%= art.MarcaArticulo.Descripcion %></p>
                             <p class="fw-bold">$ <%= art.PrecioArticulo %></p>
-                            <a href="#" class="btn btn-primary w-100">Ver detalle</a>
+                            <a href="#" class="btn btn-primary btn-md" >Ver detalle</a>
+                            <%if (false)
+                                {%>
+                                    <a href="#" class="btn btn-primary btn-md">Pausar publicacion</a>
+                                <%} %>
+                            <%--agregar una validacion que cuando el usuario sea admin vaya a default pero que diga "HOME / ADMIN" y un boton que permita ver
+   los productos en modo admin, y modo usuario con un boton en la tarjeta del producto para mofificar a este.--%>
                         </div>
                     </div>
                 </div>
@@ -45,3 +60,6 @@
     </main>
 
 </asp:Content>
+
+
+
