@@ -9,11 +9,15 @@
         </section>
 
         <div>
-            <asp:GridView Id="dgvProductos" AutoGenerateColumns="false" runat="server">
+            <asp:GridView Id="dgvProductos" AutoGenerateColumns="false" class="table table-dark table-striped" DataKeyNames="Id" runat="server">
                 <Columns>
                     <asp:BoundField HeaderText="Codigo Articulo" DataField="CodigoArticulo"/>
                     <asp:BoundField HeaderText="Nombre Articulo" DataField="NombreArticulo"/>
                     <asp:BoundField HeaderText="Descripcion" DataField="DescripcionArticulo"/>
+                    <asp:BoundField HeaderText="Categoria" DataField="CategoriaArticulo.Descripcion"/>
+                    <asp:BoundField HeaderText="Marca" DataField="MarcaArticulo.Descripcion"/>
+                    <asp:BoundField HeaderText="Precio" DataField="PrecioArticulo"/>
+                    <asp:ButtonField  />
                     
                 </Columns>
             </asp:GridView>

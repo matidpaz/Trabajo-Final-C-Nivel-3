@@ -52,5 +52,73 @@ namespace Negocio
 				throw ex;
 			}
         }
+
+		public List<Marca> listarMarcas() {
+
+			List<Marca> lista = new List<Marca>();
+			AccesoADB datos = new AccesoADB();
+			try
+			{
+
+				datos.setearConsultaConSP("ListarMarcasSP");
+				datos.ejecutarLectura();
+
+				while (datos.Lector.Read())
+				{
+					Marca mar = new Marca();
+					mar.Id = (int)datos.Lector["Id"];
+					mar.Descripcion = datos.Lector["Descripcion"].ToString();
+					lista.Add(mar);
+				}
+
+				return lista;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally {
+				if (true)
+				{
+					datos.cerrarConexion();
+				}
+			}
+		}
+
+        public List<Categoria> listarCategorias()
+        {
+
+            List<Categoria> lista = new List<Categoria>();
+            AccesoADB datos = new AccesoADB();
+            try
+            {
+
+                datos.setearConsultaConSP("ListarCategoriasSP");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)datos.Lector["Id"];
+                    cat.Descripcion = datos.Lector["Descripcion"].ToString();
+                    lista.Add(cat);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                if (true)
+                {
+                    datos.cerrarConexion();
+                }
+            }
+        }
     }
 }

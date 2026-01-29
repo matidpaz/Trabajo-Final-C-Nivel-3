@@ -47,7 +47,7 @@
                             <a href="#" class="btn btn-primary btn-md" >Ver detalle</a>
                             <%if (false)
                                 {%>
-                                    <a href="#" class="btn btn-primary btn-md">Pausar publicacion</a>
+                                    <a href="#" class="btn btn-primary btn-md">Accion</a>
                                 <%} %>
                             <%--agregar una validacion que cuando el usuario sea admin vaya a default pero que diga "HOME / ADMIN" y un boton que permita ver
    los productos en modo admin, y modo usuario con un boton en la tarjeta del producto para mofificar a este.--%>
