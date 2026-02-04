@@ -20,13 +20,29 @@ namespace ConexionDB
 
         public AccesoADB()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security = true"); //verificar y meter la direccion de la base de datos
-            comando = new SqlCommand();   
+            try
+            {
+                conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security = true"); //verificar y meter la direccion de la base de datos
+                comando = new SqlCommand();   
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         public void setearConsulta(string consulta) 
         {
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta;
+            try
+            {
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = consulta;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public void ejecutarLectura() 
@@ -53,9 +69,17 @@ namespace ConexionDB
             conexion.Close();  
         }
 
-        public void setearParametro(string nombreParametro, string valor) 
+        public void setearParametro(string nombreParametro, object valor) 
         {
-            comando.Parameters.AddWithValue(nombreParametro, valor);
+            try
+            {
+                comando.Parameters.AddWithValue(nombreParametro, valor);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public void ejecutarAccion() 
@@ -63,7 +87,9 @@ namespace ConexionDB
             try
             {
                 comando.Connection = conexion;
+                conexion.Open();
                 comando.ExecuteNonQuery();
+                cerrarConexion();
 
             }
             catch (Exception ex)
@@ -74,8 +100,33 @@ namespace ConexionDB
         }
         public void setearConsultaConSP(string sp) 
         {
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.CommandText = sp;
+            try
+            {
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.CommandText = sp;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public int ejecutarAccionScalar() 
+        {
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                int idRetornado = int.Parse(comando.ExecuteScalar().ToString());
+                cerrarConexion();
+                return idRetornado;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

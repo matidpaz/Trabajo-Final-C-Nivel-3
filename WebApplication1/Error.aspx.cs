@@ -10,11 +10,15 @@ namespace WebApplication1
     public partial class Error : System.Web.UI.Page
     {
         public string MensajeDeError { get; set; }
-        protected void Page_Load(object sender, EventArgs e)
+        public string Explicacion { get; set; }
+        public void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["error"] != null)
+            if (Session["error"] != null)
             {
-                MensajeDeError = Request.QueryString["error"];
+                lblError.Text = Session["error"].ToString();
+                lblError.Text = Session["explicacion"].ToString();
+                MensajeDeError = Session["error"].ToString();
+                Explicacion = Session["explicacion"].ToString();
             }
         }
     }

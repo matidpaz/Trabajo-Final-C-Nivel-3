@@ -15,9 +15,33 @@ namespace WebApplication1
         {
             if ((List<Producto>)Session["listaDeProductos"] != null)
             {
-                //lista = (List<Producto>)Session["listaDeProductos"];
-                dgvProductos.DataSource = (List<Producto>)Session["listaDeProductos"];
-                dgvProductos.DataBind();
+                try
+                {
+                    //lista = (List<Producto>)Session["listaDeProductos"];
+                    dgvProductos.DataSource = (List<Producto>)Session["listaDeProductos"];
+                    dgvProductos.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("explicacion", "Fallo en Page_Load - Admin");
+                    Session.Add("error", ex.ToString());
+                    Response.Redirect("Error.aspx",false);
+                }
+            }
+        }
+
+        protected void dgvProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(dgvProductos.SelectedDataKey.Value.ToString());
+                Response.Redirect("ProductoFormulario?Id= " + id + "&paginaAnterior=Admin.aspx",false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("explicacion", "Fallo en dgvProductos_SelectedIndexChanged - Admin");
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

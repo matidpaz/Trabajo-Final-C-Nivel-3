@@ -6,23 +6,28 @@
         <style>
             .card-img-top {
                 width: 100%;
-                height: 250px;             /* Define una altura fija para todas las tarjetas*/
-                object-fit: contain;       /* Ajusta la imagen sin recortarla */
+                height: 250px; /* Define una altura fija para todas las tarjetas*/
+                object-fit: contain; /* Ajusta la imagen sin recortarla */
                 background-color: #f8f9fa; /* Fondo gris claro para rellenar espacios vacíos */
             }
         </style>
 
         <section class="row" aria-labelledby="aspnetTitle">
             <%if (true)
-              {%>
-                    <h1 id="aspnetTitle">Home/Admin</h1>
+                {%>
+            <h1 id="aspnetTitle">Home/Admin</h1>
             <%}
-              else
-              {%>
-                    <h1 id="aspnetTitle">Home</h1>
+                else
+                {%>
+            <h1 id="aspnetTitle">Home</h1>
             <%} %>
             <p class="lead">Mi aplicacion de practica para mostrar productos.</p>
             <p><a href="Admin.aspx" class="btn btn-primary btn-md">Modo Admin &raquo;</a></p>
+            <br />
+            <%if (true)
+                {%>
+            <a href="ProductoFormulario.aspx" class="btn btn-primary btn-md">Registrar nuevo Articulo</a>
+            <%} %>
         </section>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -44,11 +49,8 @@
                             <p class="fw-bold">Categoria: <%= art.CategoriaArticulo.Descripcion %></p>
                             <p class="fw-bold">Marca: <%= art.MarcaArticulo.Descripcion %></p>
                             <p class="fw-bold">$ <%= art.PrecioArticulo %></p>
-                            <a href="#" class="btn btn-primary btn-md" >Ver detalle</a>
-                            <%if (false)
-                                {%>
-                                    <a href="#" class="btn btn-primary btn-md">Accion</a>
-                                <%} %>
+                            <a href="ProductoFormulario.aspx?Id=<%= art.Id %>&paginaAnterior = Default.aspx" class="btn btn-primary btn-md">Ver detalle</a>
+
                             <%--agregar una validacion que cuando el usuario sea admin vaya a default pero que diga "HOME / ADMIN" y un boton que permita ver
    los productos en modo admin, y modo usuario con un boton en la tarjeta del producto para mofificar a este.--%>
                         </div>

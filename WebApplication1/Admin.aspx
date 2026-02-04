@@ -9,7 +9,7 @@
         </section>
 
         <div>
-            <asp:GridView Id="dgvProductos" AutoGenerateColumns="false" class="table table-dark table-striped" DataKeyNames="Id" runat="server">
+            <asp:GridView Id="dgvProductos" AutoGenerateColumns="false" class="table table-dark table-striped" DataKeyNames="Id" OnSelectedIndexChanged="dgvProductos_SelectedIndexChanged" runat="server">
                 <Columns>
                     <asp:BoundField HeaderText="Codigo Articulo" DataField="CodigoArticulo"/>
                     <asp:BoundField HeaderText="Nombre Articulo" DataField="NombreArticulo"/>
@@ -17,7 +17,8 @@
                     <asp:BoundField HeaderText="Categoria" DataField="CategoriaArticulo.Descripcion"/>
                     <asp:BoundField HeaderText="Marca" DataField="MarcaArticulo.Descripcion"/>
                     <asp:BoundField HeaderText="Precio" DataField="PrecioArticulo"/>
-                    <asp:ButtonField  />
+                    
+                    <asp:CommandField ControlStyle-CssClass="btn btn-primary" ShowSelectButton="true" HeaderText="Seleccion" SelectText="Detalles" />
                     
                 </Columns>
             </asp:GridView>
