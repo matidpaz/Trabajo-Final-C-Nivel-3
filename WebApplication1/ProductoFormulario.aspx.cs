@@ -45,7 +45,8 @@ namespace WebApplication1
                         txtNombre.CssClass += " is-valid";
                         txtDescripcion.Text = productoSeleccionado.DescripcionArticulo.ToString();
                         txtDescripcion.CssClass += " is-valid";
-                        ImgUrl.ImageUrl = string.IsNullOrEmpty(productoSeleccionado.ImagenArticulo) ? "https://www.site.com/imagen-por-defecto.png" : productoSeleccionado.ImagenArticulo;
+                        txtImagen.Text = string.IsNullOrEmpty(productoSeleccionado.ImagenArticulo) ? "https://www.site.com/imagen-por-defecto.png" : productoSeleccionado.ImagenArticulo;
+                        txtImagen.CssClass += " is-valid";
                         ddlCategoria.SelectedValue = productoSeleccionado.CategoriaArticulo.Id.ToString();
                         ddlCategoria.CssClass = ddlCategoria.CssClass.Replace("is-invalid", "is-valid");
                         ddlMarca.SelectedValue = productoSeleccionado.MarcaArticulo.Id.ToString();
@@ -53,10 +54,7 @@ namespace WebApplication1
                         txtPrecio.Text = productoSeleccionado.PrecioArticulo.ToString("F2");
                         txtPrecio.CssClass += " is-valid";
                     }
-
-                }
-
-                
+                }      
             }
             catch (Exception ex)
             {
@@ -70,16 +68,16 @@ namespace WebApplication1
         {
             try
             {
-                //if (!Page.IsValid)
-                //{
-                //    return;
-                //}
+                if (!Page.IsValid)
+                {
+                    return;
+                }
                 string codigo = txtCodigo.Text;
                 string nombre = txtNombre.Text;
                 string descripcion = txtDescripcion.Text;
                 int categoria = int.Parse(ddlCategoria.SelectedValue);
                 int marca = int.Parse(ddlMarca.SelectedValue);
-                string imagen = ImgUrl.ToString();
+                string imagen = txtImagen.ToString();
                 decimal precio = decimal.Parse(txtPrecio.Text);
 
                 NegocioFunciones negocio = new NegocioFunciones();
@@ -103,6 +101,11 @@ namespace WebApplication1
         {
             try
             {
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+                //Agregar validacion de campo modificado, para que no pueda mandar la modificacion a la base de datos sin haber modificado ningun atributo - Tambien en JavaScript
                 NegocioFunciones negocio = new NegocioFunciones();
                 int IdTomado = int.Parse(txtId.Text);
                 string codigo = txtCodigo.Text;

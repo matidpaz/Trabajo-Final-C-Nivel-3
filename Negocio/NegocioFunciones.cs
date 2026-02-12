@@ -2,11 +2,14 @@
 using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Negocio
 {
@@ -166,10 +169,128 @@ namespace Negocio
 		public void eliminarArticulo(int Id)
 		{
 			AccesoADB datos = new AccesoADB();
+			try
+			{
+				datos.setearConsultaConSP("EliminarProductoSP");
+				datos.setearParametro("@Id", Id);
+				datos.ejecutarAccion();
+			}
+			catch (Exception ex)
+			{
 
-			datos.setearConsultaConSP("EliminarProductoSP");
-			datos.setearParametro("@Id", Id);
-			datos.ejecutarAccion();
+				throw ex;
+			}
+		}
+
+		public int crearUser(User user)
+		{
+			AccesoADB datos = new AccesoADB();
+			try
+			{
+				datos.setearConsultaConSP("CrearUser_SP");
+				datos.setearParametro("@Email", user.EmailUsuario);
+				datos.setearParametro("@Pass", user.PassUsuario);
+				datos.setearParametro("@Nombre", (object)user.NombreUsuario ?? DBNull.Value);
+				datos.setearParametro("@Apellido", (object)user.ApellidoUsuario ?? DBNull.Value);
+				datos.setearParametro("@Imagen", (object)user.ImagenPerfil ?? DBNull.Value);
+				int idNuevo = (int)datos.ejecutarAccionScalar();
+				return idNuevo;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				datos.cerrarConexion();
+			}
+		}
+
+		public User verificarUser(User user)
+		{
+			AccesoADB datos = new AccesoADB();
+			User userLog = null;
+			try
+			{
+				datos.setearConsultaConSP("VerificarUsuario_SP");
+				datos.setearParametro("@Email", user.EmailUsuario);
+				datos.setearParametro("@Pass", user.PassUsuario);
+				datos.ejecutarLectura();
+				if (datos.Lector.Read())
+				{
+					userLog = new User();
+                    userLog.IdUsuario = (int)datos.Lector["Id"];
+					userLog.EmailUsuario = datos.Lector["email"].ToString();
+					userLog.PassUsuario = datos.Lector["pass"].ToString();
+					userLog.NombreUsuario = datos.Lector["nombre"] is DBNull ? null : datos.Lector["nombre"].ToString();
+					userLog.ApellidoUsuario = datos.Lector["apellido"] is DBNull ? null : datos.Lector["apellido"].ToString();
+					userLog.ImagenPerfil = datos.Lector["urlImagenPerfil"] is DBNull ? null : datos.Lector["urlImagenPerfil"].ToString();
+					userLog.PerfilAdmin = (bool)datos.Lector["admin"];
+				}
+				return userLog;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.cerrarConexion();
+			}
+		}
+		public User modificarUsuario(User user) 
+		{
+			AccesoADB datos = new AccesoADB();
+			try
+			{
+				datos.setearConsultaConSP("ModificarUser");
+				datos.setearParametro("@Id", user.IdUsuario);
+				datos.setearParametro("@Nombre", (object)user.NombreUsuario ?? DBNull.Value);
+				datos.setearParametro("@Apellido", (object)user.ApellidoUsuario ?? DBNull.Value);
+				datos.setearParametro("@Imagen", (object)user.ImagenPerfil ?? DBNull.Value);
+				datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    user.IdUsuario = (int)datos.Lector["Id"];
+                    user.EmailUsuario = datos.Lector["email"].ToString();
+                    user.PassUsuario = datos.Lector["pass"].ToString();
+                    user.NombreUsuario = datos.Lector["nombre"] is DBNull ? null : datos.Lector["nombre"].ToString();
+                    user.ApellidoUsuario = datos.Lector["apellido"] is DBNull ? null : datos.Lector["apellido"].ToString();
+                    user.ImagenPerfil = datos.Lector["urlImagenPerfil"] is DBNull ? null : datos.Lector["urlImagenPerfil"].ToString();
+                    user.PerfilAdmin = (bool)datos.Lector["admin"];
+                }
+				return user;
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.cerrarConexion();
+			}
+        }
+
+		public bool verificarEmail(string email) 
+		{
+			try
+			{
+				AccesoADB datos = new AccesoADB();
+				datos.setearConsultaConSP("verificarNuevoMail_SP");
+				datos.setearParametro("@Email", email);
+				object resultado = datos.ejecutarAccionScalarParaEmail();
+				if (resultado != null && resultado != DBNull.Value)
+				{
+					return false;
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
 		}
     }
 }

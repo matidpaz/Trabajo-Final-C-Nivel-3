@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.aspx" />
+    <Content Include="Carrito.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Favoritos.aspx" />
     <Content Include="MiPerfil.aspx" />
@@ -124,7 +125,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="ProductoDetalle.aspx" />
+    <Content Include="FormularioUser.aspx" />
     <Content Include="ProductoFormulario.aspx" />
     <Content Include="Registrarse.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -197,6 +198,13 @@
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Carrito.aspx.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Carrito.aspx.designer.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -237,12 +245,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ProductoDetalle.aspx.cs">
-      <DependentUpon>ProductoDetalle.aspx</DependentUpon>
+    <Compile Include="FormularioUser.aspx.cs">
+      <DependentUpon>FormularioUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ProductoDetalle.aspx.designer.cs">
-      <DependentUpon>ProductoDetalle.aspx</DependentUpon>
+    <Compile Include="FormularioUser.aspx.designer.cs">
+      <DependentUpon>FormularioUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductoFormulario.aspx.cs">
       <DependentUpon>ProductoFormulario.aspx</DependentUpon>

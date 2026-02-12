@@ -22,7 +22,8 @@ namespace ConexionDB
         {
             try
             {
-                conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security = true"); //verificar y meter la direccion de la base de datos
+                //conexion = new SqlConnection("server=.\\MSSQLocalDB; database=CATALOGO_WEB_DB; integrated security = true"); //verificar y meter la direccion de la base de datos
+                conexion = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CATALOGO_WEB_DB;Integrated Security=True;Connect Timeout=30"); //verificar y meter la direccion de la base de datos
                 comando = new SqlCommand();   
             }
             catch (Exception ex)
@@ -119,6 +120,22 @@ namespace ConexionDB
                 comando.Connection = conexion;
                 conexion.Open();
                 int idRetornado = int.Parse(comando.ExecuteScalar().ToString());
+                cerrarConexion();
+                return idRetornado;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public Object ejecutarAccionScalarParaEmail()
+        {
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                object idRetornado = comando.ExecuteScalar();
                 cerrarConexion();
                 return idRetornado;
             }

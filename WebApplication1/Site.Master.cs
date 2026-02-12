@@ -11,7 +11,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //esta es la page master a la que me trae y no se a donde pertenece
         }
     }
 }

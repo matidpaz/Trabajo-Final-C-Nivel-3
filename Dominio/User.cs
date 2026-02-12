@@ -14,6 +14,7 @@ namespace Dominio
         public string ApellidoUsuario { get; set; }
         private string emailUsuario { get; set; }
         private string passUsuario { get; set; }
+        public string ImagenPerfil { get; set; }
         public bool PerfilAdmin { get; set; }
         public List<Producto> Favoritos { get; set; }
 
@@ -24,10 +25,10 @@ namespace Dominio
             set
             {
                 // Guardo la expresion regular dentro de una variable para luego comparar el valor de seteo con la expresion
-                string patronEmail = "^([\\w -\\.] +)@((\\[[0 - 9]{1,3}\\.[0 - 9]{1,3}\\.[0 - 9]{ 1,3}\\.)| (([\\w -] +\\.)+))([a - zA - Z]{ 2,4}| [0 - 9]{ 1,3})(\\]?)$";
+                string patronEmail = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
                 if (value != "" && Regex.IsMatch(value, patronEmail)) 
                 {
-                    emailUsuario = value;
+                    emailUsuario = value.ToString();
                 }
                 else
                 {
@@ -42,7 +43,7 @@ namespace Dominio
             {
                 if (value != "")
                 {
-                    passUsuario = value;
+                    passUsuario = value.ToString();
                 }
                 else
                 {
