@@ -28,14 +28,21 @@ namespace WebApplication1
                         txtPass.Text = user.PassUsuario.ToString();
                         txtNombre.Text = user.NombreUsuario == null ? "" : user.NombreUsuario.ToString();
                         txtApellido.Text = user.ApellidoUsuario == null ? "" : user.ApellidoUsuario.ToString();
-                        txtImagenUsuario.Text = user.ApellidoUsuario == null ? "" : user.ImagenPerfil.ToString();
+                        txtImagenUsuario.Text = user.ImagenPerfil == null ? "" : user.ImagenPerfil.ToString();
+                        imgPerfil.Src = user.ImagenPerfil == null ? "" : user.ImagenPerfil.ToString();
+                        configuracionDeControles();
+                    }
+                    else
+                    {
+                        //var ex = "Para ingresar primero debes registrarte como Usuario";
+                        //Response.Redirect("Error.aspx?ex= " + ex, false);
                     }
                 }
+                configuracionDeControles();
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Response.Redirect("Error.aspx?ex= " + ex, false);
             }
         }
         //recordar revisar para hashear las contraseñas que se guardan en la base de datos
@@ -55,6 +62,9 @@ namespace WebApplication1
                     user.ApellidoUsuario = string.IsNullOrEmpty(txtApellido.Text.Trim()) ? null : txtApellido.Text.Trim().ToString();
                     user.ImagenPerfil = string.IsNullOrEmpty(txtImagenUsuario.Text.Trim()) ? null : txtImagenUsuario.Text.Trim().ToString();
                     negocio.crearUser(user);
+                    Session.Add("usuarioLogueado", user);
+                    Registrado = Session["usuarioLogueado"] != null ? true : false;
+                    configuracionDeControles();
                 }
                 else
                 {
@@ -85,6 +95,19 @@ namespace WebApplication1
             {
 
                 throw ex;
+            }
+        }
+        private void configuracionDeControles()
+        {
+            if (Session["usuarioLogueado"] != null)
+            {
+                btnModificar.Visible = true;
+                btnAceptar.Visible = false;
+            }
+            else
+            {
+                btnAceptar.Visible = true;
+                btnModificar.Visible = false;
             }
         }
     }

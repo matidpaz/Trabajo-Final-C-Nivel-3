@@ -8,7 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
-
+    
+    <script src='<%= ResolveUrl("~/Scripts/MisFunciones/Funciones.js") %>'></script>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -49,8 +50,11 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Ingresar</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li>
+                        <%if (Session["usuarioLogueado"] != null)
+                            {%>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="FormularioUser.aspx">Mi Perfil</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrito">Mi Carrito</a></li>
+                          <%}%>
                     </ul>
                 </div>
             </div>
