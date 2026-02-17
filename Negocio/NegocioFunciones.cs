@@ -128,9 +128,17 @@ namespace Negocio
                 }
             }
         }
-		public Producto buscarPorId(int Id, List<Producto> lista)
+		public Producto buscarPorId(int Id)
 		{
-			return  lista.Find(x => x.Id == Id);
+			try
+			{
+				List<Producto> lista = listarProductos();
+				return  lista.Find(x => x.Id == Id);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		public int crearArticulo(string codigo, string nombre, string descripcion, int categoria, int marca, string imagen, decimal precio) 

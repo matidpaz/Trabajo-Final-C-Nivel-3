@@ -46,8 +46,8 @@
                 </div>
                 <%--Campo Imagen de Usuario - puede ser null pero debe tener una por defecto para que no se rompa--%>
                 <div class="mb-3">
-                    <label for="txtImagenUsuario" class="form-label">Imageb</label>
-                    <asp:TextBox type="text" class="form-control" ID="txtImagenUsuario" ClientIDMode="Static" runat="server" aria-describedby="emailHelp" oninput="ActivarBoton()" />
+                    <label for="txtImagenUsuario" class="form-label">Imagen</label>
+                    <asp:TextBox type="text" class="form-control" ID="txtImagenUsuario" ClientIDMode="Static" runat="server" aria-describedby="emailHelp" oninput="ActivarBoton(); cargarImagen()" />
                     <div id="imagenHelp" class="form-text"></div>
                 </div>
                 <%--Campo Admin - No visible, se inicializa en null y se adminitra con super usuario--%>
@@ -60,8 +60,9 @@
             </div>
             <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
                 <label class="form-label">Previsualización:</label>
-                <img id="imgPerfil" runat="server" src="https://via.placeholder.com/250"
-                    class="img-thumbnail" style="width: 250px; height: 250px; object-fit: cover;"
+                
+                <img id="imgPerfil" runat="server" ClientIDMode="static" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s"
+                    class="img-thumbnail" style="width: 500px; height: 500px; object-fit: cover;"
                     onerror="this.src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'"/>
             </div>
             <asp:UpdatePanel runat="server">
@@ -75,12 +76,16 @@
                         { %>
                     <asp:Button ID="btnAceptar" type="submit" Text="Aceptar" class="btn btn-primary" OnClick="btnAceptar_Click" runat="server"></asp:Button>
                     <%}%>
+                    <script>ActivarBoton();</script>
                 </ContentTemplate>
             </asp:UpdatePanel>
     </form>
     <script>
-        var listaVieja = capturarEstadosViejos();
-        ActivarBoton();
+        function pageLoad(sender, args)
+        {
+            window.listaVieja = capturarEstadosViejos();
+            ActivarBoton();
+        }
     </script>
 
 </asp:Content>

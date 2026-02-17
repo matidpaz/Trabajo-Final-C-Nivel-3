@@ -4,6 +4,9 @@
 
     <main>
         <style>
+            .oculto{
+                display: none;
+            }
             .card-img-top {
                 width: 100%;
                 height: 250px; /* Define una altura fija para todas las tarjetas*/
@@ -13,7 +16,7 @@
         </style>
 
         <section class="row" aria-labelledby="aspnetTitle">
-            <%if (true)
+            <%if (TipoUser == "1")
                 {%>
             <h1 id="aspnetTitle">Home/Admin</h1>
             <%}
@@ -22,11 +25,14 @@
             <h1 id="aspnetTitle">Home</h1>
             <%} %>
             <p class="lead">Mi aplicacion de practica para mostrar productos.</p>
+            <%if (TipoUser == "1")
+                {%>
             <p><a href="Admin.aspx" class="btn btn-primary btn-md">Modo Admin &raquo;</a></p>
+            <%} %>
             <br />
             <%if (true)
                 {%>
-            <a href="ProductoFormulario.aspx" class="btn btn-primary btn-md">Registrar nuevo Articulo</a>
+            <p><a href="ProductoFormulario.aspx" class="btn btn-primary btn-md">Registrar nuevo Articulo</a></p>
             <%} %>
         </section>
 
@@ -46,10 +52,17 @@
                         <%-- El margen superior automático (mt-auto) empuja el botón hacia abajo --%>
                         <div class="mt-auto">
                             <hr />
+                             
+                            
                             <p class="fw-bold">Categoria: <%= art.CategoriaArticulo.Descripcion %></p>
                             <p class="fw-bold">Marca: <%= art.MarcaArticulo.Descripcion %></p>
                             <p class="fw-bold">$ <%= art.PrecioArticulo %></p>
                             <a href="ProductoFormulario.aspx?Id=<%= art.Id %>&paginaAnterior = Default.aspx" class="btn btn-primary btn-md">Ver detalle</a>
+                            <%if (TipoUser == "1" || TipoUser == "0")
+                                {%>
+                            <button id="selectFavorito" type="submit" name="idFavorito" value="<%=art.Id %>" class="btn btn-primary" onclick="" >Agregar a favoritos</button>
+                            
+                            <%} %>
 
                             <%--agregar una validacion que cuando el usuario sea admin vaya a default pero que diga "HOME / ADMIN" y un boton que permita ver
    los productos en modo admin, y modo usuario con un boton en la tarjeta del producto para mofificar a este.--%>

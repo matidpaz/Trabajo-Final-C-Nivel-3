@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Microsoft.AspNet.FriendlyUrls;
 using Negocio;
+using ConexionDB;
 
 namespace WebApplication1
 {
     public partial class _Default : Page
     {
-        public bool EsAdmin { get; set; }
+        public string TipoUser { get; set; }
+		public User user { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -20,12 +22,11 @@ namespace WebApplication1
 	        {
 				if (Session["usuarioLogueado"] != null)
 				{
-					EsAdmin = ((Dominio.User)Session["usuarioLogueado"]).PerfilAdmin;
-				}
-				else
-				{
-					EsAdmin = false;
-				}
+					TipoUser = ((Dominio.User)Session["usuarioLogueado"]).PerfilAdmin == true ? "1" : "0";
+					user = (Dominio.User)Session["usuarioLogueado"];
+                }
+				
+
 				List<Producto> listaDeProductos = new List<Producto>();
 				NegocioFunciones negocio = new NegocioFunciones();
 
@@ -34,6 +35,17 @@ namespace WebApplication1
 				if (listaDeProductos != null)
 				{
 					Session.Add("listaDeProductos",listaDeProductos);
+				}
+				if (IsPostBack)
+				{
+					string capturarId = Request.Form["idFavorito"];
+					if (!string.IsNullOrEmpty(capturarId))
+					{
+						int id = int.Parse(capturarId);
+						Producto prod = negocio.buscarPorId(id);
+
+                        user.Favoritos.Add(prod);
+					}
 				}
 
 	        }
@@ -44,5 +56,7 @@ namespace WebApplication1
 	        }
 
 }
+
+        
     }
 }

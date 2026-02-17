@@ -153,19 +153,22 @@
                     <asp:Image ID="ImgUrl" CssClass="img-fluid" runat="server" onerror="this.src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg';" />
                 </div>
                 <%--Muestra botones. Dependiendo si la redireccion ocurre con un parametro Id distinto de nulo, es porque voy a crear un nuevo artculo, sino es porque voy a modificar o eliminar --%>
-                <%if (!(Request.QueryString["Id"] != null))
-                    {%>
-                <asp:Button ID="btnNuevo" CssClass="btn btn-success" runat="server" Text="Nuevo" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas crear un nuevo artículo?');" OnClick="btnNuevo_Click" />
+                <%if (user != null)
+                  {
+                        if (user.PerfilAdmin == true)
+                        {
+                            if (!(Request.QueryString["Id"] != null))
+                            {%>
+                                <asp:Button ID="btnNuevo" CssClass="btn btn-success" runat="server" Text="Nuevo" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas crear un nuevo artículo?');" OnClick="btnNuevo_Click" />
+                             <%}
+                        else
+                        {%>
+                                <asp:Button ID="btnModificar" CssClass="btn btn-warning" runat="server" Text="Modificar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas modificar este artículo?');" OnClick="btnModificar_Click" />
+                                <asp:Button ID="btnBorrar" CssClass="btn btn-danger" runat="server" Text="Borrar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas borrar este registro?');" OnClick="btnBorrar_Click" />
+                         <%}
+                        }%>
+                        <asp:Button ID="btnAgregarAFavoritos" Text="Agregar a favoritos" runat="server" CssClass ="btn btn-primary btn-md" OnClick="btnAgregarAFavoritos_Click" />
                 <%} %>
-
-                <%else
-
-                    {%>
-
-                <asp:Button ID="btnModificar" CssClass="btn btn-warning" runat="server" Text="Modificar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas modificar este artículo?');" OnClick="btnModificar_Click" />
-                <asp:Button ID="btnBorrar" CssClass="btn btn-danger" runat="server" Text="Borrar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas borrar este registro?');" OnClick="btnBorrar_Click" />
-
-                <% } %>
                 <div>
                 </div>
                 <div>

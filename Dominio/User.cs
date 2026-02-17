@@ -51,6 +51,10 @@ namespace Dominio
                 }
             }
         }
+        public User() 
+        {
+            Favoritos = new List<Producto>();   //Esto es un constructor que hace que al instanciar un objeto, le genera una instancia a la lista para poder usar .Add()
+        }
 
 
     }

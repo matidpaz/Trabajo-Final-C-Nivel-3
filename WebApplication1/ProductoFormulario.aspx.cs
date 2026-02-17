@@ -11,10 +11,16 @@ namespace WebApplication1
 {
     public partial class ProductoFormulario : System.Web.UI.Page
     {
+        public User user;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                if (Session["usuarioLogueado"] != null)
+                {
+                    user = (User)Session["usuarioLogueado"];
+                }
+
                 NegocioFunciones negocio = new NegocioFunciones();
 
                 if (!IsPostBack)
@@ -35,7 +41,7 @@ namespace WebApplication1
                     {
                         List<Producto> listaDeProductos = (List<Producto>)Session["listaDeProductos"];
                         int Id = int.Parse(Request.QueryString["Id"]);
-                        Producto productoSeleccionado = negocio.buscarPorId(Id, listaDeProductos);
+                        Producto productoSeleccionado = negocio.buscarPorId(Id);
 
                         txtId.Text = productoSeleccionado.Id.ToString();
                         txtId.ReadOnly = true;
@@ -144,6 +150,25 @@ namespace WebApplication1
                 Session.Add("explicacion", "Fallo en btnBorrar_Click - ProductoFormulario");
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnAgregarAFavoritos_Click(object sender, EventArgs e)
+        {
+            NegocioFunciones negocio = new NegocioFunciones();
+            User user = (User)Session["usuarioLogueado"];
+            try
+            {
+                Button btn = (Button)sender;
+                int idFavorito = int.Parse(btn.CommandArgument);
+                if (user != null)
+                {
+                    user.Favoritos.Add(negocio.buscarPorId(idFavorito));
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Error.aspx?error= " + ex.Message, false);
             }
         }
     }
