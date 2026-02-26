@@ -15,8 +15,6 @@ namespace WebApplication1
         {
 
         }
-
-
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
             NegocioFunciones negocio = new NegocioFunciones();
@@ -36,14 +34,22 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                string descripcion = "btnIngresar_Click - Login";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FormularioUser.aspx", false);
+            try
+            {
+                Response.Redirect("FormularioUser.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                string descripcion = "btnRegistrarse_Click - Login";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
+            }
         }
     }
 }

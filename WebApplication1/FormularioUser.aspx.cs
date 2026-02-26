@@ -42,7 +42,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Redirect("Error.aspx?ex= " + ex, false);
+                string descripcion = "Fallo en Page_Load - FormularioUser";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
         //recordar revisar para hashear las contraseñas que se guardan en la base de datos
@@ -74,8 +75,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                string descripcion = "btnAceptar_Click - FormularioUser";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }     
         }
 
@@ -93,21 +94,29 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                string descripcion = "btnModificar_Click - FormularioUser";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
-        private void configuracionDeControles()
+        private void configuracionDeControles() //Esta funcion es para ponerla en otro lado creo
         {
-            if (Session["usuarioLogueado"] != null)
+            try
             {
-                btnModificar.Visible = true;
-                btnAceptar.Visible = false;
+                if (Session["usuarioLogueado"] != null)
+                {
+                    btnModificar.Visible = true;
+                    btnAceptar.Visible = false;
+                }
+                else
+                {
+                    btnAceptar.Visible = true;
+                    btnModificar.Visible = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                btnAceptar.Visible = true;
-                btnModificar.Visible = false;
+                string descripcion = "configuracionDeControles - FormularioUser";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
     }

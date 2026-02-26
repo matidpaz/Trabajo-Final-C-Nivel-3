@@ -9,16 +9,21 @@ namespace WebApplication1
 {
     public partial class Error : System.Web.UI.Page
     {
-        public string MensajeDeError { get; set; }
-        public string Explicacion { get; set; }
+     
         public void Page_Load(object sender, EventArgs e)
         {
-            if (Session["error"] != null)
+            try
             {
-                lblError.Text = Session["error"].ToString();
-                lblError.Text = Session["explicacion"].ToString();
-                MensajeDeError = Session["error"].ToString();
-                Explicacion = Session["explicacion"].ToString();
+                if (Request.QueryString["error"] != null)
+                {
+                    lblError.Text = Request.QueryString["error"].ToString();
+                    lblError.Text = Session["explicacion"].ToString();   
+                }
+            }
+            catch (Exception ex)
+            {
+                string descripcion = "Page_Load - Error";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
     }

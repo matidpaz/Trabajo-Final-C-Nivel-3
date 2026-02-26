@@ -7,168 +7,180 @@
         }
     </style>
     <div class="container">
-        <form class="row">
-            <div class="col-6">
-
-                <div class="col-mb-3">
-                    <%--campo ID --%>
-                    <label for="txtId" class="form-label oculto">Id del producto</label>
-                    <asp:TextBox type="text" class="form-control oculto" ID="txtId" oninput="validarCampo(this)" runat="server" />
-                    <asp:RequiredFieldValidator
-                        runat="server"
-                        Display="Dynamic"
-                        ErrorMessage="Debe ingresar un Id"
-                        ControlToValidate="txtId"
-                        ForeColor="Red"
-                        CssClass="valid-feedback">
-                        <span class="icon-error"></span>
-                    </asp:RequiredFieldValidator>
-                    <div class="valid-feedback">
-                        Correcto!
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-mb-3">
+                        <%--campo ID --%>
+                        <label for="txtId" class="form-label oculto">Id del producto</label>
+                        <asp:TextBox type="text" class="form-control oculto" ID="txtId" oninput="validarCampo(this)" runat="server" />
+                        <asp:RequiredFieldValidator
+                            runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="Debe ingresar un Id"
+                            ControlToValidate="txtId"
+                            ForeColor="Red"
+                            CssClass="valid-feedback">
+                            <span class="icon-error"></span>
+                        </asp:RequiredFieldValidator>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
                     </div>
-                </div>
-                <%--campo Codigo/validacion --%>
-                <div class="col-md-4">
-                    <label for="txtCodigo" class="form-label">Codigo del producto</label>
-                    <asp:TextBox type="text" ID="txtCodigo" CssClass="form-control" oninput="validarCampo(this)" ClientIDMode="Static" runat="server" />
-                    <asp:RequiredFieldValidator
-                        runat="server"
-                        Display="Dynamic"
-                        ErrorMessage="El campo 'Codigo' es oblogatorio"
-                        ControlToValidate="txtCodigo"
-                        SetFocusOnError="true"
-                        ForeColor="Red"
-                        CssClass="valid-feedback">
-                        <span class="icon-error"></span>
-                    </asp:RequiredFieldValidator>
-                    <div class="valid-feedback">
-                        Correcto!
+                    <%--campo Codigo/validacion --%>
+                    <div class="col-md-4">
+                        <label for="txtCodigo" class="form-label">Codigo del producto</label>
+                        <asp:TextBox type="text" ID="txtCodigo" CssClass="form-control" oninput="validarCampo(this)" ClientIDMode="Static" runat="server" />
+                        <asp:RequiredFieldValidator
+                            runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="El campo 'Codigo' es oblogatorio"
+                            ControlToValidate="txtCodigo"
+                            SetFocusOnError="true"
+                            ForeColor="Red"
+                            CssClass="valid-feedback">
+                            <span class="icon-error"></span>
+                        </asp:RequiredFieldValidator>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
                     </div>
-                </div>
-                <%--campo Nombre/validacion --%>
-                <div class="col-md-4">
-                    <label for="txtNombre" class="form-label">Nombre del producto</label>
-                    <asp:TextBox type="text" ID="txtNombre" CssClass="form-control" oninput="validarCampo(this)" ClientIDMode="Static" runat="server" />
-                    <asp:RequiredFieldValidator
-                        runat="server"
-                        Display="Dynamic"
-                        ErrorMessage="El campo 'Nombre' es obligatorio"
-                        ControlToValidate="txtNombre"
-                        SetFocusOnError="true"
-                        ForeColor="Red"
-                        CssClass="valid-feedback">
-                        <span class="icon-error"></span>
-                    </asp:RequiredFieldValidator>
-                    <div class="valid-feedback">
-                        Correcto!
+                    <%--campo Nombre/validacion --%>
+                    <div class="col-md-4">
+                        <label for="txtNombre" class="form-label">Nombre del producto</label>
+                        <asp:TextBox type="text" ID="txtNombre" CssClass="form-control" oninput="validarCampo(this)" ClientIDMode="Static" runat="server" />
+                        <asp:RequiredFieldValidator
+                            runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="El campo 'Nombre' es obligatorio"
+                            ControlToValidate="txtNombre"
+                            SetFocusOnError="true"
+                            ForeColor="Red"
+                            CssClass="valid-feedback">
+                            <span class="icon-error"></span>
+                        </asp:RequiredFieldValidator>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
                     </div>
-                </div>
-                <%--campo Descripcion/validacion --%>
-                <div class="col-md-4">
-                    <label for="txtDescripcion" class="form-label">Descripcion</label>
-                    <asp:TextBox type="text" ID="txtDescripcion" CssClass="form-control" oninput="validarCampo(this)" ClientIDMode="Static" runat="server" />
-                    <asp:RequiredFieldValidator
-                        runat="server"
-                        Display="Dynamic"
-                        ErrorMessage="El campo 'Descripción' es obligatorio"
-                        ControlToValidate="txtDescripcion"
-                        SetFocusOnError="true"
-                        ForeColor="Red"
-                        CssClass="valid-feedback">
-                        <span class="icon-error"></span>
-                    </asp:RequiredFieldValidator>
-                    <div class="valid-feedback">
-                        Correcto!
+                    <%--campo Descripcion/validacion --%>
+                    <div class="col-md-4">
+                        <label for="txtDescripcion" class="form-label">Descripcion</label>
+                        <asp:TextBox type="text" ID="txtDescripcion" CssClass="form-control" oninput="validarCampo(this)" ClientIDMode="Static" runat="server" />
+                        <asp:RequiredFieldValidator
+                            runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="El campo 'Descripción' es obligatorio"
+                            ControlToValidate="txtDescripcion"
+                            SetFocusOnError="true"
+                            ForeColor="Red"
+                            CssClass="valid-feedback">
+                            <span class="icon-error"></span>
+                        </asp:RequiredFieldValidator>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
                     </div>
-                </div>
-                <%--campo Categoria/validacion --%>
-                <div class="col-md-3">
-                    <label for="ddlCategoria" class="form-label">Categoria</label>
-                    <asp:DropDownList
-                        runat="server"
-                        ID="ddlCategoria"
-                        CssClass="form-select is-invalid"
-                        onchange="validarDdl(this)"
-                        ClientIDMode="Static">
-                    </asp:DropDownList>
-                    <div id="verificacionDdlCategoria"
-                        class="valid-feedback">
-                        Correcto!
+                    <%--campo Categoria/validacion --%>
+                    <div class="col-md-3">
+                        <label for="ddlCategoria" class="form-label">Categoria</label>
+                        <asp:DropDownList
+                            runat="server"
+                            ID="ddlCategoria"
+                            CssClass="form-select is-invalid"
+                            onchange="validarDdl(this)"
+                            ClientIDMode="Static">
+                        </asp:DropDownList>
+                        <div id="verificacionDdlCategoria"
+                            class="valid-feedback">
+                            Correcto!
+                        </div>
                     </div>
-                </div>
-                <%--campo Marca/validacion --%>
-                <div class="col-md-3">
-                    <label for="ddlMarca" class="form-label">Marca</label>
-                    <asp:DropDownList
-                        runat="server"
-                        ID="ddlMarca"
-                        CssClass="form-select is-invalid"
-                        onchange="validarDdl(this)"
-                        ClientIDMode="Static">
-                    </asp:DropDownList>
-                    <div id="verificacionDdlMarca" class="valid-feedback">
-                        Correcto!
+                    <%--campo Marca/validacion --%>
+                    <div class="col-md-3">
+                        <label for="ddlMarca" class="form-label">Marca</label>
+                        <asp:DropDownList
+                            runat="server"
+                            ID="ddlMarca"
+                            CssClass="form-select is-invalid"
+                            onchange="validarDdl(this)"
+                            ClientIDMode="Static">
+                        </asp:DropDownList>
+                        <div id="verificacionDdlMarca" class="valid-feedback">
+                            Correcto!
+                        </div>
                     </div>
-                </div>
-                <%--campo Imagen/validacion --%>
-                <div class="mb-3">
-                    <label for="txtImagen" class="form-label">Imagen de Articulo</label>
-                    <asp:TextBox ID="txtImagen" runat="server" CssClass="form-control" placeholder="Ej: 1500.50" oninput="validarCampo(this)" ClientIDMode="Static" />
-                    <asp:RequiredFieldValidator
-                        runat="server"
-                        Display="Dynamic"
-                        ErrorMessage="El campo 'Precio' es obligatorio"
-                        ControlToValidate="txtImagen"
-                        SetFocusOnError="true"
-                        ForeColor="Red"
-                        CssClass="valid-feedback">
-                        <span class="icon-error"></span>
-                    </asp:RequiredFieldValidator>
-                </div>
-                <%--campo Precio/Doble validacion (por campo vacio y por expresion regular) --%>
-                <div class="mb-3">
-                    <label for="txtPrecio" class="form-label">Precio del Artículo</label>
-                    <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" placeholder="Ej: 1500.50" oninput="validarCampo(this)" ClientIDMode="Static" />
-                    <asp:RequiredFieldValidator
-                        runat="server"
-                        Display="Dynamic"
-                        ErrorMessage="El campo 'Precio' es obligatorio"
-                        ControlToValidate="txtPrecio"
-                        ForeColor="Red"
-                        CssClass="valid-feedback">
-                        <span class="icon-error"></span>
-                    </asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator
-                        ID="revPrecio"
-                        runat="server"
-                        ControlToValidate="txtPrecio"
-                        ValidationExpression="^\d+(?:[.,]\d{1,2})?$"
-                        Display="Dynamic"
-                        ForeColor="Red"
-                        CssClass="validador-estado"
-                        ErrorMessage="Formato de precio inválido (use punto o coma para decimales)" />
+                    <%--campo Imagen/validacion --%>
+                    <div class="mb-3">
+                        <label for="txtImagen" class="form-label">Imagen de Articulo</label>
+                        <asp:TextBox ID="txtImagen" runat="server" CssClass="form-control" placeholder="www.imagen.com" oninput="validarCampo(this)" ClientIDMode="Static" />
+                        <asp:RequiredFieldValidator
+                            runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="El campo 'Precio' es obligatorio"
+                            ControlToValidate="txtImagen"
+                            SetFocusOnError="true"
+                            ForeColor="Red"
+                            CssClass="valid-feedback">
+                            <span class="icon-error"></span>
+                        </asp:RequiredFieldValidator>
+                    </div>
+                    <%--campo Precio/Doble validacion (por campo vacio y por expresion regular) --%>
+                    <div class="mb-3">
+                        <label for="txtPrecio" class="form-label">Precio del Artículo</label>
+                        <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" placeholder="Ej: 1500.50" oninput="validarCampo(this)" ClientIDMode="Static" />
+                        <asp:RequiredFieldValidator
+                            runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="El campo 'Precio' es obligatorio"
+                            ControlToValidate="txtPrecio"
+                            ForeColor="Red"
+                            CssClass="valid-feedback">
+                            <span class="icon-error"></span>
+                        </asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator
+                            ID="revPrecio"
+                            runat="server"
+                            ControlToValidate="txtPrecio"
+                            ValidationExpression="^\d+(?:[.,]\d{1,2})?$"
+                            Display="Dynamic"
+                            ForeColor="Red"
+                            CssClass="validador-estado"
+                            ErrorMessage="Formato de precio inválido (use punto o coma para decimales)" />
+                    </div>
                 </div>
                 <%--campo Imagen por defecto --%>
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
+                <label class="form-label">Previsualización:</label>
+
+                <img id="imgArticulo" runat="server" clientidmode="static" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s"
+                    class="img-thumbnail img-fluid" style="width: 500px; height: 500px; object-fit: contain;"
+                    onerror="this.src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'" />
+            </div>
+
                 <div class="col-6">
-                    <asp:Image ID="ImgUrl" CssClass="img-fluid" runat="server" onerror="this.src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg';" />
+                    
                 </div>
                 <%--Muestra botones. Dependiendo si la redireccion ocurre con un parametro Id distinto de nulo, es porque voy a crear un nuevo artculo, sino es porque voy a modificar o eliminar --%>
                 <%if (user != null)
-                  {
+                    {
                         if (user.PerfilAdmin == true)
                         {
                             if (!(Request.QueryString["Id"] != null))
                             {%>
-                                <asp:Button ID="btnNuevo" CssClass="btn btn-success" runat="server" Text="Nuevo" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas crear un nuevo artículo?');" OnClick="btnNuevo_Click" />
-                             <%}
-                        else
-                        {%>
-                                <asp:Button ID="btnModificar" CssClass="btn btn-warning" runat="server" Text="Modificar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas modificar este artículo?');" OnClick="btnModificar_Click" />
-                                <asp:Button ID="btnBorrar" CssClass="btn btn-danger" runat="server" Text="Borrar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas borrar este registro?');" OnClick="btnBorrar_Click" />
-                         <%}
-                        }%>
-                        <asp:Button ID="btnAgregarAFavoritos" Text="Agregar a favoritos" runat="server" CssClass ="btn btn-primary btn-md" OnClick="btnAgregarAFavoritos_Click" />
-                <%} %>
+                <asp:Button ID="btnNuevo" CssClass="btn btn-success" runat="server" Text="Nuevo" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas crear un nuevo artículo?');" OnClick="btnNuevo_Click" />
+                <%}
+                    else
+                    {%>
+                <asp:Button ID="btnModificar" CssClass="btn btn-warning" runat="server" Text="Modificar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas modificar este artículo?');" OnClick="btnModificar_Click" />
+                <asp:Button ID="btnBorrar" CssClass="btn btn-danger" runat="server" Text="Borrar" ClientIDMode="Static" OnClientClick="return confirm('¿Estás seguro de que deseas borrar este registro?');" OnClick="btnBorrar_Click" />
+                <%}
+                    }
+                    else
+                    {%>
+                <asp:Button ID="btnAgregarAFavoritos" Text="Agregar a favoritos" runat="server" CssClass="btn btn-primary btn-md" OnClick="btnAgregarAFavoritos_Click" />
+                <%}
+                    }%>
                 <div>
                 </div>
                 <div>

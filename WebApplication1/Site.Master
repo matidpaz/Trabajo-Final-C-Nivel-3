@@ -4,17 +4,17 @@
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
-    
+
     <script src='<%= ResolveUrl("~/Scripts/MisFunciones/Funciones.js") %>'></script>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -47,15 +47,87 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 ">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login">Ingresar</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li>
+                                    <%-- Opcion de "Todas" y que devuelva valor "0" --%>
+                                    <asp:LinkButton ID="btnCatTodas" runat="server"
+                                        CssClass="dropdown-item"
+                                        OnClick="btnCategoria_Click"
+                                        CommandArgument="0">
+                                        Todas
+                                    </asp:LinkButton>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <asp:Repeater ID="repCategorias" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <asp:LinkButton ID="btnCategoria" runat="server"
+                                                CssClass="dropdown-item"
+                                                OnClick="btnCategoria_Click"
+                                                CommandArgument='<%# Eval("Id") %>'>
+                                            <%#Eval("Descripcion") %>
+                                            </asp:LinkButton>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Marcas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li>
+                                    <%-- Opcion de "Todas" y que devuelva valor "0" --%>
+                                    <asp:LinkButton ID="btnMarTodas" runat="server"
+                                        CssClass="dropdown-item"
+                                        OnClick="btnMarca_Click"
+                                        CommandArgument="0">
+                                        Todas
+                                    </asp:LinkButton>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <asp:Repeater ID="repMarcas" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <asp:LinkButton ID="btnMarca" runat="server"
+                                                CssClass="dropdown-item"
+                                                OnClick="btnMarca_Click"
+                                                CommandArgument='<%# Eval("Id") %>'>
+                                                <%#Eval("Descripcion") %>
+                                            </asp:LinkButton>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </li>
                         <%if (Session["usuarioLogueado"] != null)
                             {%>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="FormularioUser.aspx">Mi Perfil</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrito">Mi Carrito</a></li>
-                          <%}%>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="FormularioUser.aspx">Mi Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrito">Mi Carrito</a></li>
+                        <%}%>
+
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+
                     </ul>
+                    <%if (Session["usuarioLogueado"] != null)
+                        {%>
+                    <asp:Button ID="btnCerrarSesion" runat="server" CssClass="btn btn-outline-success" Text="Cerrar Sesión" OnClick="btnCerrarSesion_Click" />
+                    <%}
+                        else
+                        {%>
+                    <li class="btn btn-outline-success"><a class="nav-link" runat="server" href="~/Login">Ingresar</a></li>
+                    <% }%>
                 </div>
             </div>
         </nav>
@@ -71,5 +143,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
     </asp:PlaceHolder>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/javascript.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

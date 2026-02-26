@@ -53,6 +53,7 @@ namespace WebApplication1
                         txtDescripcion.CssClass += " is-valid";
                         txtImagen.Text = string.IsNullOrEmpty(productoSeleccionado.ImagenArticulo) ? "https://www.site.com/imagen-por-defecto.png" : productoSeleccionado.ImagenArticulo;
                         txtImagen.CssClass += " is-valid";
+                        imgArticulo.Src = txtImagen.Text;
                         ddlCategoria.SelectedValue = productoSeleccionado.CategoriaArticulo.Id.ToString();
                         ddlCategoria.CssClass = ddlCategoria.CssClass.Replace("is-invalid", "is-valid");
                         ddlMarca.SelectedValue = productoSeleccionado.MarcaArticulo.Id.ToString();
@@ -64,9 +65,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Session.Add("explicacion", "Fallo en Page_Load - ProductoFormulario");
-                Session.Add("error", ex.ToString());
-                Response.Redirect("Error.aspx", false);
+                string descripcion = "Fallo en Page_Load - ProductoFormulario";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
 
@@ -97,9 +97,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Session.Add("explicacion", "Fallo en btnNuevo_Click - ProductoFormulario");
-                Session.Add("error", ex.ToString());
-                Response.Redirect("Error.aspx", false);
+                string descripcion = "Fallo en btnNuevo_Click - ProductoFormulario";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
 
@@ -119,7 +118,7 @@ namespace WebApplication1
                 string descripcion = txtDescripcion.Text;
                 int categoria = int.Parse(ddlCategoria.SelectedValue);
                 int marca = int.Parse(ddlMarca.SelectedValue);
-                string imagen = ImgUrl.ToString();
+                string imagen = txtImagen.ToString();
                 decimal precio = decimal.Parse(txtPrecio.Text);
                 negocio.modificarArticulo(IdTomado,codigo,nombre,descripcion,categoria,marca,imagen,precio);
 
@@ -128,10 +127,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Session.Add("explicacion", "Fallo en btnModificar_Click - ProductoFormulario");
-                Session.Add("error", ex.ToString());
-                Session.Add("error", ex.ToString());
-                 
+                string descripcion = "Fallo en btnModificar_Click - ProductoFormulario";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
 
@@ -147,12 +144,12 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Session.Add("explicacion", "Fallo en btnBorrar_Click - ProductoFormulario");
-                Session.Add("error", ex.ToString());
-                Response.Redirect("Error.aspx", false);
+                string descripcion = "Fallo en btnBorrar_Click - ProductoFormulario";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
 
+        //Este evento sera distinto al de la pagina default, porque en este voy a capturar el id que viene por url.
         protected void btnAgregarAFavoritos_Click(object sender, EventArgs e)
         {
             NegocioFunciones negocio = new NegocioFunciones();
@@ -160,7 +157,7 @@ namespace WebApplication1
             try
             {
                 Button btn = (Button)sender;
-                int idFavorito = int.Parse(btn.CommandArgument);
+                int idFavorito = int.Parse(Request.QueryString["id"]);
                 if (user != null)
                 {
                     user.Favoritos.Add(negocio.buscarPorId(idFavorito));
@@ -168,7 +165,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Redirect("Error.aspx?error= " + ex.Message, false);
+                string descripcion = "Fallo en btnAgregarAfavoritos_Click - ProductoFormulario";
+                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
         }
     }

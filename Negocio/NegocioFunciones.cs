@@ -47,16 +47,12 @@ namespace Negocio
 					string precioEnString = (Math.Truncate(precio*100) / 100).ToString("F2"); ;
 					art.PrecioArticulo = decimal.Parse(precioEnString);
 					
-
-					listaDeProductos.Add(art);
-					
+					listaDeProductos.Add(art);					
 				}
-
 				return listaDeProductos;
 			}
 			catch (Exception ex)
 			{
-
 				throw ex;
 			}
         }
@@ -67,7 +63,6 @@ namespace Negocio
 			AccesoADB datos = new AccesoADB();
 			try
 			{
-
 				datos.setearConsultaConSP("ListarMarcas_SP");
 				datos.ejecutarLectura();
 
@@ -78,12 +73,10 @@ namespace Negocio
 					mar.Descripcion = datos.Lector["Descripcion"].ToString();
 					lista.Add(mar);
 				}
-
 				return lista;
 			}
 			catch (Exception ex)
 			{
-
 				throw ex;
 			}
 			finally {
@@ -96,12 +89,10 @@ namespace Negocio
 
         public List<Categoria> listarCategorias()
         {
-
             List<Categoria> lista = new List<Categoria>();
             AccesoADB datos = new AccesoADB();
             try
             {
-
                 datos.setearConsultaConSP("ListarCategorias_SP");
                 datos.ejecutarLectura();
 
@@ -112,12 +103,10 @@ namespace Negocio
                     cat.Descripcion = datos.Lector["Descripcion"].ToString();
                     lista.Add(cat);
                 }
-
                 return lista;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -144,34 +133,45 @@ namespace Negocio
 		public int crearArticulo(string codigo, string nombre, string descripcion, int categoria, int marca, string imagen, decimal precio) 
 		{
 			AccesoADB datos = new AccesoADB();
-
-			datos.setearConsultaConSP("RegistrarNuevo_SP");
-			datos.setearParametro("@Codigo", codigo);
-			datos.setearParametro("@Nombre", nombre);
-			datos.setearParametro("@Descripcion", descripcion);
-			datos.setearParametro("@IdCategoria", categoria);
-			datos.setearParametro("@IdMarca", marca);
-			datos.setearParametro("@ImgUrl", imagen);
-			datos.setearParametro("@Precio", precio);
-			int Id = datos.ejecutarAccionScalar();
-			return Id;
+			try
+			{
+				datos.setearConsultaConSP("RegistrarNuevo_SP");
+				datos.setearParametro("@Codigo", codigo);
+				datos.setearParametro("@Nombre", nombre);
+				datos.setearParametro("@Descripcion", descripcion);
+				datos.setearParametro("@IdCategoria", categoria);
+				datos.setearParametro("@IdMarca", marca);
+				datos.setearParametro("@ImgUrl", imagen);
+				datos.setearParametro("@Precio", precio);
+				int Id = datos.ejecutarAccionScalar();
+				return Id;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		public void modificarArticulo(int Id, string codigo, string nombre, string descripcion, int categoria, int marca, string imagen, decimal precio)
 		{
 			AccesoADB datos = new AccesoADB();
-
-			datos.setearConsultaConSP("ActualizarProductoSP");
-			datos.setearParametro("@Id", Id);
-            datos.setearParametro("@Codigo", codigo);
-            datos.setearParametro("@Nombre", nombre);
-            datos.setearParametro("@Descripcion", descripcion);
-            datos.setearParametro("@IdCategoria", categoria);
-            datos.setearParametro("@IdMarca", marca);
-            datos.setearParametro("@ImgUrl", imagen);
-            datos.setearParametro("@Precio", precio);
-			datos.ejecutarAccion();
-			
+			try
+			{
+				datos.setearConsultaConSP("ActualizarProductoSP");
+				datos.setearParametro("@Id", Id);
+				datos.setearParametro("@Codigo", codigo);
+				datos.setearParametro("@Nombre", nombre);
+				datos.setearParametro("@Descripcion", descripcion);
+				datos.setearParametro("@IdCategoria", categoria);
+				datos.setearParametro("@IdMarca", marca);
+				datos.setearParametro("@ImgUrl", imagen);
+				datos.setearParametro("@Precio", precio);
+				datos.ejecutarAccion();			
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		public void eliminarArticulo(int Id)
@@ -185,7 +185,6 @@ namespace Negocio
 			}
 			catch (Exception ex)
 			{
-
 				throw ex;
 			}
 		}
@@ -206,7 +205,6 @@ namespace Negocio
 			}
 			catch (Exception ex)
 			{
-
 				throw ex;
 			}
 			finally
@@ -300,5 +298,52 @@ namespace Negocio
 				throw ex;
 			}
 		}
+
+		public List<Producto> filtrarPorCategoria(List<Producto>lista, int idCat)
+		{
+			try
+			{
+				if (idCat != 0)
+				{
+					List<Producto> listaFiltrada1 = lista.FindAll(x => x.CategoriaArticulo.Id == idCat);
+					return listaFiltrada1;
+				}
+				return lista;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+        }
+        public List<Producto> filtrarPorMarca(List<Producto> lista, int idMar)
+        {
+			try
+			{
+				if (idMar != 0)
+				{
+					List<Producto> listaFiltrada2 = lista.FindAll(x => x.MarcaArticulo.Id == idMar);
+					return listaFiltrada2;
+				}
+				return lista;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+        }
+
+        public List<Producto> filtarPorMarcaYCategoria(List<Producto> lista, int idCat, int idMar)
+		{
+			try
+			{
+				List<Producto> filtradoCategoria =  filtrarPorCategoria(lista, idCat);
+				List<Producto> filtradoMarca = filtrarPorMarca(filtradoCategoria, idMar);
+				return filtradoMarca;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+        }
     }
 }
