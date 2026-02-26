@@ -14,6 +14,18 @@
                 object-fit: contain; /* Ajusta la imagen sin recortarla */
                 background-color: #f8f9fa; /* Fondo gris claro para rellenar espacios vacíos */
             }
+
+            .estilo {
+                background: linear-gradient(to right, #eef2f3, #8e9eab);
+            }
+
+            .card:hover {
+                transform: scale(1.02);
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+            }
+
+            
         </style>
 
         <section class="row" aria-labelledby="aspnetTitle">
@@ -46,7 +58,7 @@
             <% foreach (Dominio.Producto art in lista)
                 { %>
             <div class="col">
-                <div class="card h-100 d-flex flex-column">
+                <div class="card h-100 d-flex flex-column shadow-sm card:hover">
                     <img src="<%= art.ImagenArticulo %>" class="card-img-top" alt="..."
                         onerror="this.src='https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg';">
 

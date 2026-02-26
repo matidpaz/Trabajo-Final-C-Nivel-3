@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using ServicioEmail;
 
 
 namespace WebApplication1
@@ -53,10 +54,12 @@ namespace WebApplication1
             {
                 NegocioFunciones negocio = new NegocioFunciones();
                 User user = new User();
+                
                 if (negocio.verificarEmail(txtEmail.Text.Trim()))
                 {
-                    lblMailIncorecto.CssClass += " oculto"; 
-                    
+                    lblMailIncorecto.CssClass += " oculto";
+
+                    EmailService emailService = new EmailService();
                     user.EmailUsuario = txtEmail.Text.Trim();
                     user.PassUsuario = txtPass.Text.Trim();
                     user.NombreUsuario = string.IsNullOrEmpty(txtNombre.Text.Trim()) ? null : txtNombre.Text.Trim().ToString();
@@ -66,6 +69,8 @@ namespace WebApplication1
                     Session.Add("usuarioLogueado", user);
                     Registrado = Session["usuarioLogueado"] != null ? true : false;
                     configuracionDeControles();
+                    emailService.armarCorreo(user.EmailUsuario, "Bienvenida usuario", "Este mail es solo para darte la bienvenida..");
+                    emailService.enviarMail();
                 }
                 else
                 {

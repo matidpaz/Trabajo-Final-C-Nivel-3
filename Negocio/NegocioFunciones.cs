@@ -332,7 +332,7 @@ namespace Negocio
 			}
         }
 
-        public List<Producto> filtarPorMarcaYCategoria(List<Producto> lista, int idCat, int idMar)
+        public List<Producto> filtarPorMarcaYCategoria(List<Producto> lista, int idCat, int idMar) // Esta funcion no la estoy usando pero la dejo por si me conviene usarla en algun momento
 		{
 			try
 			{
@@ -345,5 +345,15 @@ namespace Negocio
 				throw ex;
 			}
         }
+		public List<Producto> busquedaAvanzada(List<Producto> lista, string fragmento)
+		{
+			lista = lista.FindAll(
+				x => x.NombreArticulo.ToLower().Contains(fragmento) ||
+				x.MarcaArticulo.Descripcion.ToLower().Contains(fragmento) ||
+				x.CategoriaArticulo.Descripcion.ToLower().Contains(fragmento) ||
+				x.DescripcionArticulo.ToLower().Contains(fragmento));
+			return lista;
+		}
+
     }
 }
