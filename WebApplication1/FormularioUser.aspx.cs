@@ -74,7 +74,7 @@ namespace WebApplication1
                 }
                 else
                 {
-                    lblMailIncorecto.CssClass = lblMailIncorecto.CssClass.Replace("oculto", "");
+                    lblMailIncorecto.CssClass = lblMailIncorecto.CssClass.Replace("oculto", "").Trim();
                 }
 
             }

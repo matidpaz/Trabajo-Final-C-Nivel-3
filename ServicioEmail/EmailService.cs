@@ -18,11 +18,12 @@ namespace ServicioEmail
         {
             try
             {
-                server = new SmtpClient();
-                server.Credentials = new NetworkCredential("862e5cdac3db0e", "****9cd7");
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                server = new SmtpClient("sandbox.smtp.mailtrap.io", 2525);
+                server.Credentials = new NetworkCredential("862e5cdac3db0e", "5120e87b069cd7");
                 server.EnableSsl = true;
-                server.Port = 2525;
-                server.Host = "sandbox.smtp.mailtrap.io";
+                //server.Port = 2525;
+                //server.Host = "sandbox.smtp.mailtrap.io";
             }
             catch (Exception ex)
             {
@@ -35,7 +36,7 @@ namespace ServicioEmail
             try
             {
                 email = new MailMessage();
-                email.From = new MailAddress("noResponder@appPrueba.com");
+                email.From = new MailAddress("noResponder@gmail.com");
                 email.To.Add(emailDestino);
                 email.Subject = asunto;
                 email.IsBodyHtml = true;

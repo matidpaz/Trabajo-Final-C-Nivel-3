@@ -2,9 +2,12 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-        .sin-borde{
+        .sin-borde {
             outline: none;
             border: 0;
+        }
+        .oculto {
+            display: none;
         }
     </style>
     <main aria-labelledby="title">
@@ -19,6 +22,11 @@
                 <label for="txtPass" class="form-label">Contraseña</label>
                 <asp:TextBox type="password" class="form-control" ID="txtPass" ClientIDMode="Static" runat="server" />
             </div>
+            <asp:UpdatePanel ID="updLbl" runat="server">
+                <ContentTemplate>
+                    <asp:Label ID="lblMailOPassIncorecto" CssClass="oculto" ForeColor="Red" runat="server" ClientIDMode="Static">Mail o Pass incorrecto</asp:Label>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <div class="mb-3">
                 <asp:CheckBox type="checkbox" CssClass="form-check-input sin-borde" ID="cbxRecordarme" runat="server" />
                 <label class="form-check-label" for="cbxRecordarme">Recordarme</label>

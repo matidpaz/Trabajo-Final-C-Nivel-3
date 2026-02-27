@@ -17,7 +17,7 @@ namespace WebApplication1
                 if (Request.QueryString["error"] != null)
                 {
                     lblError.Text = Request.QueryString["error"].ToString();
-                    lblError.Text = Session["explicacion"].ToString();   
+                    lblExplicacion.Text = Request.QueryString["explicacion"].ToString();                
                 }
             }
             catch (Exception ex)

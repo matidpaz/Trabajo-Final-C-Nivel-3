@@ -23,7 +23,11 @@
                 <div class="mb-3">
                     <label for="txtEmail" class="form-label">Email address</label>
                     <asp:TextBox type="email" class="form-control" ID="txtEmail" ClientIDMode="Static" runat="server" aria-describedby="emailHelp" oninput="ActivarBoton()" />
-                    <asp:Label ID="lblMailIncorecto" CssClass="oculto" ForeColor="Red" runat="server">Debe seleccionar otro email</asp:Label>
+                    <asp:UpdatePanel ID="updLbl" runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="lblMailIncorecto" CssClass="oculto" ForeColor="Red" runat="server" ClientIDMode="Static">Debe seleccionar otro email</asp:Label>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <div id="emailHelp" class="form-text">Campo obligatorio</div>
                 </div>
                 <%--Campo pass - validar con JavaScript y servidor--%>

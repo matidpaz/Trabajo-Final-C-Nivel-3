@@ -31,6 +31,10 @@ namespace WebApplication1
                     Session.Add("usuarioLogueado", userExistente);
                     Response.Redirect("FormularioUser.aspx", false);
                 }
+                else
+                {
+                    lblMailOPassIncorecto.CssClass = lblMailOPassIncorecto.CssClass.Replace("oculto", "");
+                }
             }
             catch (Exception ex)
             {
