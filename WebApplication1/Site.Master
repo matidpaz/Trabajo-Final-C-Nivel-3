@@ -117,7 +117,7 @@
                         <%if (Session["usuarioLogueado"] != null)
                             {%>
                         <li class="nav-item"><a class="nav-link" runat="server" href="FormularioUser.aspx">Mi Perfil</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrito">Mi Carrito</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Favoritos">Mis favoritos</a></li>
                         <%}%>
 
                         <asp:TextBox ID="txtbuscar" runat="server" CssClass="form-control me-2" placeholder="Buscar"></asp:TextBox>
