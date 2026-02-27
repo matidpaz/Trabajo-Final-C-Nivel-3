@@ -56,8 +56,23 @@ namespace WebApplication1
 					if (!string.IsNullOrEmpty(capturarId))
 					{
 						int id = int.Parse(capturarId);
-						Producto prod = negocio.buscarPorId(id);
-                        user.Favoritos.Add(prod);
+						if (user.Favoritos != null)
+						{
+							bool existente = false;
+							foreach (Dominio.Producto item in user.Favoritos)
+							{
+								if (item.Id == id)
+								{
+									existente = true;
+								}
+							}
+							if (existente == false)
+							{
+								Producto prod = negocio.buscarPorId(id);
+								user.Favoritos.Add(prod);								
+                            }
+
+						}
 					}
 				}
 	        }

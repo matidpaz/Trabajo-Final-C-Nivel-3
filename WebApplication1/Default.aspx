@@ -54,7 +54,7 @@
                 {
 
                 } %>
-            <%List<Dominio.Producto> lista = (List<Dominio.Producto>)Session["listaDeProductos"]; %>
+            <%List<Dominio.Producto> lista = (List<Dominio.Producto>)Session["listaDeProductos"]; %>                                
             <% foreach (Dominio.Producto art in lista)
                 { %>
             <div class="col">
@@ -78,7 +78,6 @@
                             <%if (TipoUser == "1" || TipoUser == "0")
                                 {%>
                             <button id="selectFavorito" type="submit" name="idFavorito" value="<%=art.Id %>" class="btn btn-primary" onclick="">Agregar a favoritos</button>
-
                             <%} %>
 
                             <%--agregar una validacion que cuando el usuario sea admin vaya a default pero que diga "HOME / ADMIN" y un boton que permita ver
