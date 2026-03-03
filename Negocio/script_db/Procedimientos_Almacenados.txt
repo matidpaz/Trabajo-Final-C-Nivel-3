@@ -1,0 +1,121 @@
+﻿CREATE PROCEDURE [dbo].[ActualizarProductoSP]
+@Id INT,
+@Codigo VARCHAR(50),
+@Nombre VARCHAR(50),
+@Descripcion VARCHAR(150),
+@IdCategoria INT,
+@IdMarca INT,
+@ImgUrl VARCHAR(1000),
+@Precio MONEY
+AS
+BEGIN
+UPDATE ARTICULOS
+SET Codigo = @Codigo,
+Nombre = @Nombre,
+Descripcion = @Descripcion,
+IdCategoria = @IdCategoria,
+IdMarca = @IdMarca,
+ImagenUrl = @ImgUrl,
+Precio = @Precio
+WHERE Id = @Id
+END
+GO
+----------------------------------------------------
+CREATE procedure [dbo].[CrearUser_SP]
+@Email VARCHAR(50),
+@Pass VARCHAR(100),
+@Nombre VARCHAR(50),
+@Apellido VARCHAR(50),
+@Imagen VARCHAR(500)
+as
+begin
+insert into USERS
+(email,pass,nombre,apellido,urlImagenPerfil,admin) output inserted.Id
+values(@Email,@Pass,@Nombre,@Apellido,@Imagen,0)
+end
+GO
+----------------------------------------------------
+CREATE PROCEDURE [dbo].[EliminarProductoSP]
+@Id INT
+AS
+BEGIN
+DELETE FROM ARTICULOS
+WHERE Id = @Id;
+END
+GO
+----------------------------------------------------
+CREATE PROCEDURE [dbo].[ListarCategorias_SP]
+AS
+BEGIN
+SELECT Id, Descripcion
+FROM CATEGORIAS
+END
+GO
+----------------------------------------------------
+CREATE PROCEDURE [dbo].[ListarMarcas_SP]
+AS
+BEGIN
+SELECT Id, Descripcion
+FROM MARCAS
+END
+GO
+----------------------------------------------------
+create procedure [dbo].[ModificarUser]
+@Id INT,
+@Nombre VARCHAR(50),
+@Apellido VARCHAR(50),
+@Imagen VARCHAR(500)
+as
+begin
+UPDATE USERS
+set
+	nombre = @Nombre,
+	apellido = @Apellido,
+	urlImagenPerfil = @Imagen
+where id = @Id
+select Id, email, pass, nombre,apellido,urlImagenPerfil,admin
+from USERS
+where id = @Id
+end
+GO
+----------------------------------------------------
+CREATE PROCEDURE [dbo].[RegistrarNuevo_SP]
+@Codigo VARCHAR(50),
+@Nombre VARCHAR(50),
+@Descripcion VARCHAR(150),
+@IdCategoria INT,
+@IdMarca INT,
+@ImgUrl VARCHAR(1000),
+@Precio MONEY
+AS
+BEGIN
+INSERT INTO ARTICULOS (Codigo,Nombre,Descripcion,IdCategoria,IdMarca,ImagenUrl,Precio)
+VALUES (@Codigo,@Nombre,@Descripcion,@IdCategoria,@IdMarca,@ImgUrl,@Precio);
+SELECT SCOPE_IDENTITY() AS NuevoId
+END;
+GO
+----------------------------------------------------
+CREATE procedure [dbo].[SP_ListarTodos]
+as 
+begin
+select A.Id, Codigo, Nombre, A.Descripcion, A.IdMarca, M.Descripcion Marca, A.IdCategoria, C.Descripcion Categoria, ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C
+where A.IdMarca = M.Id and A.IdCategoria = C.Id
+end
+GO
+----------------------------------------------------
+create procedure [dbo].[verificarNuevoMail_SP]
+@Email VARCHAR (50)
+as
+begin
+select id from USERS where email = @Email
+end
+GO
+----------------------------------------------------
+CREATE procedure [dbo].[VerificarUsuario_SP]
+@Email VARCHAR (50),
+@Pass VARCHAR (100)
+AS
+BEGIN
+select Id, email, pass, nombre,apellido,urlImagenPerfil,admin from USERS where email = @Email AND pass = @Pass
+END
+GO

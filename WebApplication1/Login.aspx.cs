@@ -13,15 +13,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                throw new Exception("Probando mis errores en el login");
-            }
-            catch (Exception ex)
-            {
-                string descripcion = "Load - Login";
-                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
-            }
+            
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
