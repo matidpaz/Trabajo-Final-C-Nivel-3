@@ -22,6 +22,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 			List<Producto> listaDeProductos;
+			
 			NegocioFunciones negocio = new NegocioFunciones();
          
             try 
@@ -29,6 +30,7 @@ namespace WebApplication1
 				idCat = Session["idCat"] != null ? int.Parse(Session["idCat"].ToString()) : 0;
 				idMar = Session["idMar"] != null ? int.Parse(Session["idMar"].ToString()) : 0;
 				listaDeProductos = negocio.listarProductos();
+				
 				
 				
 				if (Session["usuarioLogueado"] != null)
@@ -79,7 +81,8 @@ namespace WebApplication1
 	        catch (Exception ex)
 	        {
                 string descripcion = "Fallo en Page_Load - Default";
-                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
+				string mensaje = Server.UrlEncode(ex.Message);
+                Response.Redirect("Error.aspx?error=" + mensaje + "&&explicacion=" + descripcion);
             }
 
 }

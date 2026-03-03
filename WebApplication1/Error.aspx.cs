@@ -23,7 +23,8 @@ namespace WebApplication1
             catch (Exception ex)
             {
                 string descripcion = "Page_Load - Error";
-                Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
+                string mensaje = Server.UrlEncode(ex.Message);
+                Response.Redirect("Error.aspx?error= " + ex.Message + "&&explicacion= " + descripcion);
             }
         }
     }

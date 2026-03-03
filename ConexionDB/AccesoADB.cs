@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ConexionDB
 {
@@ -23,7 +24,8 @@ namespace ConexionDB
             try
             {
                 //conexion = new SqlConnection("server=.\\MSSQLocalDB; database=CATALOGO_WEB_DB; integrated security = true"); //verificar y meter la direccion de la base de datos
-                conexion = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CATALOGO_WEB_DB;Integrated Security=True;Connect Timeout=30"); //verificar y meter la direccion de la base de datos
+                //conexion = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CATALOGO_WEB_DB;Integrated Security=True;Connect Timeout=30"); //verificar y meter la direccion de la base de datos
+                conexion = new SqlConnection(ConfigurationManager.AppSettings["cadenaConexion"]); 
                 comando = new SqlCommand();   
             }
             catch (Exception ex)

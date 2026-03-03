@@ -29,6 +29,7 @@ namespace WebApplication1
             catch (Exception ex)
             {
                 string descripcion = "Page_Load - Site.Master.cs";
+                //string mensaje = Server.UrlEncode(ex.Message);
                 Response.Redirect("Error.aspx?error= " + ex.Message + " &&explicacion= " + descripcion, false);
             }
             
